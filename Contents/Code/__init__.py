@@ -138,6 +138,8 @@ def Update(metadata, media, lang, force, movie):
   dict_AnimeLists, AniDBid, TVDBid, TMDbid, IMDbid, mappingList =  AnimeLists.GetMetadata(media, movie, error_log, metadata.id)
   dict_tvdb4                                                    =       tvdb4.GetMetadata(media, movie,                  source,          TVDBid,                 mappingList)
   dict_TheTVDB,                             IMDbid              =   TheTVDBv4.GetMetadata(media, movie, error_log, lang, source, AniDBid, TVDBid, IMDbid,         mappingList)
+  if AnimeLists.DetectAnidb3(media, source, mappingList, dict_TheTVDB):  # Reload to keep the TVDB specials that anidb3 moved
+    dict_TheTVDB,                           IMDbid              =   TheTVDBv4.GetMetadata(media, movie, error_log, lang, source, AniDBid, TVDBid, IMDbid,         mappingList)
   dict_AniDB, ANNid, MALids                                     =       AniDB.GetMetadata(media, movie, error_log,       source, AniDBid, TVDBid, AnimeLists.AniDBMovieSets, mappingList)
   dict_TheMovieDb,          TSDbid, TMDbid, IMDbid              =  TheMovieDb.GetMetadata(media, movie,                                   TVDBid, TMDbid, IMDbid)
   dict_FanartTV                                                 =    FanartTV.GetMetadata(       movie,                                   TVDBid, TMDbid, IMDbid)
